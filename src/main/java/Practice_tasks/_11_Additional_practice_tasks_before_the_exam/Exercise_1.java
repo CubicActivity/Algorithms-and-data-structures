@@ -1,156 +1,39 @@
 /*
-Дадено ви е бинарно пребарувачко дрво со N цели броеви.
+Дадено ви е бинарно пребарувачко дрво. Напишете рекурзивна функција inorderSuccessor која што за дадена вредност во дрвото ќе го најде нејзиниот следбеник.
+/
 
-Напишете функција со која за бинарно пребарувачко дрво и избран елемент Т од дрвото:
-
-    ќе најдете на која длабочина се наоѓа елементот T во дрвото
-
-Ќе треба да ја искористите таа функција Q пати при градењето на дрвото.
-
-Влезот ќе содржи N+Q редови од видот
-
-    insert value - Треба да ја вметнете вредноста value во дрвото.
-
-    ask value - Треба да одговорите на која длабочина во дрвото се наоѓа јазелот со вредност value
-
-Пример и структура на влезот:
-
-Влез
-
-
-Објаснување
-
-
-Излез
-
-10 7
-insert 6
-insert 3
-insert 7
-ask 3
-ask 6
-insert 4
-insert 1
-insert 2
-insert 5
-insert 9
-ask 3
-ask 9
-insert 8
-insert 10
-ask 8
-ask 4
-ask 5
-
-
-
-Прикажано е изгледот на дрвото при секое од 7те прашања во влезот
-
-
-
-2
-1
-2
-3
-4
-3
-4
-
-
-
-----------
-
-You are given a binary search tree with N integers.
-
-Write a function that, for a binary search tree and a selected element T from the tree will:
-
-    find the depth of element T in the tree
-
-You will need to use that function Q times when building the tree.
-
-The input will contain N+Q rows of the type
-
-    insert value - You need to insert the value value into the tree.
-
-    ask value- You need to answer at what depth in the tree is the node with value value
-
-Sample input:
-
-Input
-
-
-Explanation
-
-
-Output
-
-10 7
-insert 6
-insert 3
-insert 7
-ask 3
-ask 6
-insert 4
-insert 1
-insert 2
-insert 5
-insert 9
-ask 3
-ask 9
-insert 8
-insert 10
-ask 8
-ask 4
-ask 5
-
-
-
-The tree view is shown for each of the 7 questions in the input
-
-
-
-2
-1
-2
-3
-4
-3
-4
+Given a binary search tree, you need to write a recursive function inorderSuccessor that will return the successor of a given value.
 
 For example:
 Input 	Result
 
-10 7
-insert 6
-insert 3
-insert 7
-ask 3
-ask 6
-insert 4
-insert 1
-insert 2
-insert 5
-insert 9
-ask 3
-ask 9
-insert 8
-insert 10
-ask 8
-ask 4
-ask 5
-
-
-
+10
+8
 2
-1
+11
+6
+0
+9
+19
+3
+14
+16
+
+
+
+0
 2
 3
-4
-3
-4
+6
+8
+9
+11
+14
+16
+19
+
  */
-
-package Practice_tasks._8_Trees;
+package Practice_tasks._11_Additional_practice_tasks_before_the_exam;
 
 import java.util.Scanner;
 
@@ -174,24 +57,7 @@ class BNode<E extends Comparable<E>> {
 
 }
 
-// BinarySearchTree class
-//
-// CONSTRUCTION: with no initializer
-//
-// ******************PUBLIC OPERATIONS*********************
-// void insert( x )       --> Insert x
-// void remove( x )       --> Remove x
-// Comparable find( x )   --> Return item that matches x
-// Comparable findMin( )  --> Return smallest item
-// Comparable findMax( )  --> Return largest item
-// boolean isEmpty( )     --> Return true if empty; else false
-// void makeEmpty( )      --> Remove all items
-// void printTree( )      --> Print tree in sorted order
-/**
- * Implements an unbalanced binary search tree.
- * Note that all "matching" is based on the compareTo method.
- * @author Mark Allen Weiss
- */
+
 class BinarySearchTree<E extends Comparable<E>> {
 
     /** The tree root. */
@@ -241,7 +107,7 @@ class BinarySearchTree<E extends Comparable<E>> {
      * @param x the item to search for.
      * @return the matching item or null if not found.
      */
-    public int find(E x) {
+    public BNode<E> find(E x) {
         return find(x, root);
     }
 
@@ -360,20 +226,17 @@ class BinarySearchTree<E extends Comparable<E>> {
      * @param t the node that roots the tree.
      * @return node containing the matched item.
      */
-    private int find(E x, BNode<E> t) {
-
-        int depth=0;
-
+    private BNode<E> find(E x, BNode<E> t) {
         if (t == null)
-            return 0;
+            return null;
 
-        depth++;
         if (x.compareTo(t.info) < 0) {
-            depth+=find(x, t.left);
+            return find(x, t.left);
         } else if (x.compareTo(t.info) > 0) {
-            depth+=find(x, t.right);
+            return find(x, t.right);
+        } else {
+            return t;    // Match
         }
-        return depth;
     }
 
     /**
@@ -408,26 +271,16 @@ class BinarySearchTree<E extends Comparable<E>> {
 
 
 class prog{
-
-    public static void main(String[] args){
-
+    public static void main(String [] args){
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
-
         Scanner sc = new Scanner(System.in);
-        int n=sc.nextInt(),q=sc.nextInt();
-        sc.nextLine();
-
-        for(int i=0;i<n+q;i++){
-            String input = sc.nextLine();
-            String [] parts = input.split(" ");
-
-            if(parts[0].equals("insert")){
-                bst.insert(Integer.parseInt(parts[1]));
-            }else if(parts[0].equals("ask")){
-                System.out.println(bst.find(Integer.parseInt(parts[1])));
-            }
+        int n = sc.nextInt();
+        for(int i=0;i<n;i++){
+            bst.insert(sc.nextInt());
+            sc.nextLine();
         }
 
+        bst.printTree();
 
     }
 }
