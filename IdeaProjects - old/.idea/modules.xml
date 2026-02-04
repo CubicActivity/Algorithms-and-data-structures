@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BST depth/BST depth.iml" filepath="$PROJECT_DIR$/BST depth/BST depth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CBHT 1/CBHT 1.iml" filepath="$PROJECT_DIR$/CBHT 1/CBHT 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/IdeaProjects.iml" filepath="$PROJECT_DIR$/.idea/IdeaProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hashtables 2/hashtables 2.iml" filepath="$PROJECT_DIR$/hashtables 2/hashtables 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tree labs2/tree labs2.iml" filepath="$PROJECT_DIR$/tree labs2/tree labs2.iml" />
+    </modules>
+  </component>
+</project>
